@@ -13,7 +13,7 @@ public class Producao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProducao", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "DataInicio")
     private LocalDateTime dataInicio;
@@ -29,9 +29,9 @@ public class Producao {
     private String medidas;
 
     @Column(name = "Qtde")
-    private Integer qtde;
+    private Long qtde;
 
     @Column(name = "Status")
-    private Integer status;
+    private Long status;
 
 }

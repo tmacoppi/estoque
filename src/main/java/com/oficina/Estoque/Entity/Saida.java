@@ -14,7 +14,7 @@ public class Saida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idSaida", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "Data")
     private LocalDateTime data;
@@ -26,7 +26,7 @@ public class Saida {
     private BigDecimal valorUnitario;
 
     @Column(name = "Destino")
-    private Integer destino;
+    private Long destino;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idProduto", nullable = false)

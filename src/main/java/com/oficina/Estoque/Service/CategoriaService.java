@@ -22,4 +22,8 @@ public class CategoriaService {
     public Categoria gravar(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
+
+    public void apagar(Long idCategoria) {
+        categoriaRepository.deleteById(idCategoria);
+    }
 }

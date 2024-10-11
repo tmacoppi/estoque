@@ -13,7 +13,7 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProduto", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "Nome", length = 45)
     private String nome;
@@ -37,7 +37,7 @@ public class Produto {
     private LocalDateTime dataCadastro;
 
     @Column(name = "Status")
-    private Integer status;
+    private Long status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idCategoria", nullable = false)

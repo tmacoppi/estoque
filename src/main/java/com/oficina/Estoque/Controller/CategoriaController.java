@@ -26,4 +26,10 @@ public class CategoriaController {
         categoriaService.gravar(categoria);
         return new ResponseEntity<>(categoria, HttpStatus.OK);
     }
+
+    @DeleteMapping("/apagar")
+    public ResponseEntity<String> apagar(@RequestParam(value="idCategoria") Long idCategoria) {
+        categoriaService.apagar(idCategoria);
+        return new ResponseEntity<>("Categoria apagada com sucesso!", HttpStatus.OK);
+    }
 }

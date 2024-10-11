@@ -14,7 +14,7 @@ public class Entrada {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEntrada", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "Data")
     private LocalDateTime data;

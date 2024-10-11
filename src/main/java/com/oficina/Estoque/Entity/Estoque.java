@@ -13,7 +13,7 @@ public class Estoque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEstoque", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "Qtde")
     private Double qtde;

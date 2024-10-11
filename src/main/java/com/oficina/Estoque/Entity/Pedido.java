@@ -13,7 +13,7 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPedido", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "ValorTotal", precision = 10, scale = 2)
     private BigDecimal valorTotal;
