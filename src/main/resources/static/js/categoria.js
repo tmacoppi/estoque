@@ -14,13 +14,11 @@ $(document).ready(
                 type : "GET",
                 url : window.location + "categoria/",
                 success : function(result) {
-                    var categoriaT = "";
                     montarTabelaResultado(result)
-                    console.log("Success: ", result);
-                    showToast("Categorias listadas com sucesso!");
+                    //$.toaster({ priority : 'success', title : 'Categoria', message : 'Categorias listadas com sucesso!'});
                 },
                 error : function(e) {
-                    $("#getResultDiv").html("<strong>Error</strong>");
+                    $.toaster({ priority : 'danger', title : 'Categoria', message : e.responseText});
                     console.log("ERROR: ", e);
                 }
             });
@@ -47,12 +45,37 @@ $(document).ready(
             $('#getResultDiv').html(table);
         }
 
-        function showToast(mensagem) {
-            $.toast({
-                heading: 'Information',
-                text: mensagem,
-                showHideTransition: 'slide',
-                icon: 'info'
-            })
+        // SUBMIT FORM
+        $("#categoriaForm").submit(function(event) {
+            // Prevent the form from submitting via the browser.
+            event.preventDefault();
+            ajaxPostCategoria();
+        });
+
+        function ajaxPostCategoria() {
+
+            // PREPARE FORM DATA
+            var formData = {
+                nome : $("#nome").val()
+            }
+
+            // DO POST
+            $.ajax({
+                type : "POST",
+                contentType : "application/json",
+                url : window.location + "categoria/gravar/",
+                data : JSON.stringify(formData),
+                dataType : 'json',
+                success : function(result) {
+                    $.toaster({ priority : 'success', title : 'Categoria', message : result.nome + ' gravada com sucesso!'});
+                    ajaxListarCategoria();
+                    console.log(result);
+                },
+                error : function(e) {
+                    alert("Error!")
+                    console.log("ERROR: ", e);
+                }
+            });
+
         }
     })
