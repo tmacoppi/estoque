@@ -34,8 +34,8 @@ function montarTabelaResultado(result) {
 
         // Add actions column with icons and links
         const actionsCell = $('<td></td>');
-        actionsCell.append(`<button type="button" class="btn btn-danger bi-trash" th:onclick="|location.href='/usuario/apagar/${item.id}'|" />`);
-        actionsCell.append(`<button type="button" class="btn btn-warning bi-pencil" th:onclick="|location.href='/usuario/editar/${item.id}'|" />`);
+        actionsCell.append(`<button type="button" class="btn btn-warning bi-pencil" onclick="editarCategoria(${item.id})" />`);
+        actionsCell.append(`<button type="button" class="btn btn-danger bi-trash" onclick="apagarCategoria(${item.id})" />`);
         row.append(actionsCell);
 
         row.append('<td>' + item.nome + '</td>');
@@ -78,9 +78,40 @@ function ajaxPostCategoria() {
             console.log(result);
         },
         error : function(e) {
-            alert("Error!")
+            toast("Categoria", e, "error");
             console.log("ERROR: ", e);
         }
     });
 
+}
+
+function ajaxDelCategoria(idCategoria) {
+    console.log("ajaxDelCategoria");
+
+    // DO DELETE
+    $.ajax({
+        type : "DELETE",
+        contentType : "application/json",
+        url : window.location + "categoria/apagar?idCategoria=" + idCategoria,
+        //data : JSON.stringify(formData),
+        dataType : 'json',
+        success : function(result) {
+            //$.toaster({ priority : 'success', title : 'Categoria', message : result.nome + ' gravada com sucesso!'});
+            toast("Categoria", "[" + result.nome + "] apagada com sucesso!", "success");
+            ajaxListarCategoria();
+        },
+        error : function(e) {
+            toast("Categoria", e, "error");
+            console.log("ERROR: ", e);
+        }
+    });
+
+}
+
+function editarCategoria(idCategotia) {
+    alert(idCategotia);
+}
+
+function apagarCategoria(idCategoria) {
+    ajaxDelCategoria(idCategoria);
 }

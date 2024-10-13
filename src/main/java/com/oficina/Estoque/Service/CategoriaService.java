@@ -15,6 +15,10 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    public Categoria buscarCategoriaPorId(Long idCategoria) {
+        return categoriaRepository.findById(idCategoria).get();
+    }
+
     public List<Categoria> listarCategoria() {
         return categoriaRepository.findAll();
     }

@@ -28,8 +28,9 @@ public class CategoriaController {
     }
 
     @DeleteMapping("/apagar")
-    public ResponseEntity<Void> apagar(@RequestParam(value="idCategoria") Long idCategoria) {
+    public ResponseEntity<Categoria> apagar(@RequestParam(value="idCategoria") Long idCategoria) {
+        Categoria categoria = categoriaService.buscarCategoriaPorId(idCategoria);
         categoriaService.apagar(idCategoria);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(categoria, HttpStatus.OK);
     }
 }
