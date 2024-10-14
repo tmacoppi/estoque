@@ -1,30 +1,30 @@
 $(document).ready(
     function() {
         // GET REQUEST
-        $("#listarCategoria").click(function(event) {
+        $("#listarFornecedor").click(function(event) {
             event.preventDefault();
-            ajaxListarCategoria();
+            ajaxListarFornecedor();
         });
 
-        $("#categoriaForm").submit(function(event) {
+        $("#fornecedorForm").submit(function(event) {
 
             event.preventDefault();
-            ajaxPostCategoria();
+            ajaxPostFornecedor();
         });
 
     });
 
-function ajaxListarCategoria() {
+function ajaxListarFornecedor() {
     $('#getResultDiv').empty();
     $.ajax({
         type : "GET",
-        url : "/categoria/listar",
+        url : "/fornecedor/listar",
         success : function(result) {
             console.log(result);
             montarTabelaResultado(result);
         },
         error : function(e) {
-            toast("Categoria", e.responseText, "error");
+            toast("Fornecedor", e.responseText, "error");
             console.log("ERROR: ", e);
         }
     });
@@ -44,8 +44,8 @@ function montarTabelaResultado(result) {
 
         // Add actions column with icons and links
         const actionsCell = $('<td></td>');
-        actionsCell.append(`<button type="button" class="btn btn-warning bi-pencil" onclick="editarCategoria(${item.id})" />`);
-        actionsCell.append(`<button type="button" class="btn btn-danger bi-trash" onclick="apagarCategoria(${item.id})" />`);
+        actionsCell.append(`<button type="button" class="btn btn-warning bi-pencil" onclick="editarFornecedor(${item.id})" />`);
+        actionsCell.append(`<button type="button" class="btn btn-danger bi-trash" onclick="apagarFornecedor(${item.id})" />`);
         row.append(actionsCell);
 
         row.append('<td>' + item.nome + '</td>');
@@ -59,69 +59,69 @@ function montarTabelaResultado(result) {
 
 }
 
-function ajaxPostCategoria() {
-    console.log("ajaxPostCategoria");
-    const formData = obterDadosFormularioComoJSON("#categoriaForm");
+function ajaxPostFornecedor() {
+    console.log("ajaxPostFornecedor");
+    const formData = obterDadosFormularioComoJSON("#fornecedorForm");
 
     // DO POST
     $.ajax({
         type : "POST",
         contentType : "application/json",
-        url : "/categoria/gravar/",
+        url : "/fornecedor/gravar/",
         data : formData,
         dataType : 'json',
         success : function(result) {
-            toast("Categoria", result.nome + " gravada com sucesso!", "success");
-            $('#categoriaForm').trigger("reset");
-            ajaxListarCategoria();
+            toast("Fornecedor", result.nome + " gravada com sucesso!", "success");
+            $('#fornecedorForm').trigger("reset");
+            ajaxListarFornecedor();
             console.log(result);
         },
         error : function(e) {
-            toast("Categoria", e, "error");
+            toast("Fornecedor", e, "error");
             console.log("ERROR: ", e);
         }
     });
 
 }
 
-function ajaxDelCategoria(idCategoria) {
-    console.log("ajaxDelCategoria");
+function ajaxDelFornecedor(idFornecedor) {
+    console.log("ajaxDelFornecedor");
 
     // DO DELETE
     $.ajax({
         type : "DELETE",
         contentType : "application/json",
-        url : "/categoria/apagar?idCategoria=" + idCategoria,
+        url : "/fornecedor/apagar?idFornecedor=" + idFornecedor,
         //data : JSON.stringify(formData),
         dataType : 'json',
         success : function(result) {
-            toast("Categoria", "[" + result.nome + "] apagada com sucesso!", "error");
-            ajaxListarCategoria();
+            toast("Fornecedor", "[" + result.nome + "] apagada com sucesso!", "error");
+            ajaxListarFornecedor();
         },
         error : function(e) {
-            toast("Categoria", e, "error");
+            toast("Fornecedor", e, "error");
             console.log("ERROR: ", e);
         }
     });
 
 }
 
-function editarCategoria(idCategotia) {
-    $('#categoriaForm').trigger("reset");
+function editarFornecedor(idCategotia) {
+    $('#fornecedorForm').trigger("reset");
     $.ajax({
         type : "GET",
-        url : "/categoria/buscar?idCategoria=" + idCategotia,
+        url : "/fornecedor/buscar?idFornecedor=" + idCategotia,
         success : function(result) {
             console.log(result);
             preencherFormulario(result);
         },
         error : function(e) {
-            toast("Categoria", e.responseText, "error");
+            toast("Fornecedor", e.responseText, "error");
             console.log("ERROR: ", e);
         }
     });
 }
 
-function apagarCategoria(idCategoria) {
-    ajaxDelCategoria(idCategoria);
+function apagarFornecedor(idFornecedor) {
+    ajaxDelFornecedor(idFornecedor);
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html th:replace="~{base :: layout (~{:: main})}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<main>
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-secondary text-lg-center p-3">
+                <h3>Cadastro - Fornecedor</h3>
+            </div>
+        </div>
+        <div class="col-12 bg-light p-3">
+            <form id="fornecedorForm">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="id" name="id" />
+                    <label for="nome">Nome:</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Nome do Fornecedor" name="nome" required>
+                    <label for="cnpj">CNPJ:</label>
+                    <input type="text" class="form-control" id="cnpj" placeholder="CNPJ do Fornecedor" name="cnpj" required>
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" class="form-control" id="telefone" placeholder="Telefone do Fornecedor" name="telefone" required>
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" id="email" placeholder="Email do Fornecedor" name="email" required>
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" class="form-control" id="endereco" placeholder="Endereço do Fornecedor" name="endereco">
+                </div>
+                <div style="padding: 20px 10px 20px 50px"><button type="submit" class="btn btn-primary">Gravar</button></div>
+            </form>
+        </div>
+        <div class="col-12">
+            <div style="padding: 20px 10px 20px 50px"><button id="listarFornecedor" type="button" class="btn btn-primary">Listar Fornecedor</button></div>
+            <div id="getResultDiv">
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
