@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html th:replace="~{base :: layout (~{:: main})}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<main>
+    <div class="row" id="divCategoria">
+        <div class="col-sm-5">
+            <form id="categoriaForm">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="id" name="id" />
+                    <label for="nome">Nome:</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Nome da Categoria" name="nome" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Gravar</button>
+            </form>
+        </div>
+        <div class="col-sm-7" style="margin: 20px 0px 20px 0px">
+            <button id="listarCategoria" type="button" class="btn btn-primary">Listar Categoria</button>
+            <div id="getResultDiv" style="padding: 20px 10px 20px 50px">
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

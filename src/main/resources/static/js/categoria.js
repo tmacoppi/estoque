@@ -1,16 +1,20 @@
 $(document).ready(
     function() {
-        ajaxListarCategoria();
+        // GET REQUEST
+        $("#listarCategoria").click(function(event) {
+            event.preventDefault();
+            ajaxListarCategoria();
+        });
     });
 
 function ajaxListarCategoria() {
     $('#getResultDiv').empty();
     $.ajax({
         type : "GET",
-        url : window.location + "categoria/",
+        url : "/categoria/listar",
         success : function(result) {
-            montarTabelaResultado(result)
-            //$.toaster({ priority : 'success', title : 'Categoria', message : 'Categorias listadas com sucesso!'});
+            console.log(result);
+            montarTabelaResultado(result);
         },
         error : function(e) {
             //$.toaster({ priority : 'danger', title : 'Categoria', message : e.responseText});
@@ -51,29 +55,26 @@ function montarTabelaResultado(result) {
 
 // SUBMIT FORM
 $("#categoriaForm").submit(function(event) {
-    // Prevent the form from submitting via the browser.
+
     event.preventDefault();
     ajaxPostCategoria();
 });
 
 function ajaxPostCategoria() {
     console.log("ajaxPostCategoria");
-
-    // PREPARE FORM DATA
-    var formData = {
-        nome : $("#nome").val()
-    }
+    const formData = obterDadosFormularioComoJSON("#categoriaForm");
 
     // DO POST
     $.ajax({
         type : "POST",
         contentType : "application/json",
-        url : window.location + "categoria/gravar/",
-        data : JSON.stringify(formData),
+        url : "/categoria/gravar/",
+        data : formData,
         dataType : 'json',
         success : function(result) {
             //$.toaster({ priority : 'success', title : 'Categoria', message : result.nome + ' gravada com sucesso!'});
             toast("Categoria", result.nome + " gravada com sucesso!", "success");
+            $('#categoriaForm').trigger("reset");
             ajaxListarCategoria();
             console.log(result);
         },
@@ -92,12 +93,12 @@ function ajaxDelCategoria(idCategoria) {
     $.ajax({
         type : "DELETE",
         contentType : "application/json",
-        url : window.location + "categoria/apagar?idCategoria=" + idCategoria,
+        url : "/categoria/apagar?idCategoria=" + idCategoria,
         //data : JSON.stringify(formData),
         dataType : 'json',
         success : function(result) {
             //$.toaster({ priority : 'success', title : 'Categoria', message : result.nome + ' gravada com sucesso!'});
-            toast("Categoria", "[" + result.nome + "] apagada com sucesso!", "success");
+            toast("Categoria", "[" + result.nome + "] apagada com sucesso!", "error");
             ajaxListarCategoria();
         },
         error : function(e) {
@@ -109,9 +110,47 @@ function ajaxDelCategoria(idCategoria) {
 }
 
 function editarCategoria(idCategotia) {
-    alert(idCategotia);
+    $('#categoriaForm').trigger("reset");
+    $.ajax({
+        type : "GET",
+        url : "/categoria/buscar?idCategoria=" + idCategotia,
+        success : function(result) {
+            console.log(result);
+            preencherFormulario(result);
+        },
+        error : function(e) {
+            //$.toaster({ priority : 'danger', title : 'Categoria', message : e.responseText});
+            toast("Categoria", e.responseText, "error");
+            console.log("ERROR: ", e);
+        }
+    });
 }
 
 function apagarCategoria(idCategoria) {
     ajaxDelCategoria(idCategoria);
+}
+
+function preencherFormulario(objeto) {
+    // Percorre as propriedades do objeto
+    for (const propriedade in objeto) {
+        // Verifica se a propriedade é do próprio objeto (não herdada)
+        if (objeto.hasOwnProperty(propriedade)) {
+            // Seleciona o campo do formulário com o mesmo nome da propriedade
+            const campo = $("#" + propriedade);
+
+            // Define o valor do campo com o valor da propriedade
+            campo.val(objeto[propriedade]);
+        }
+    }
+}
+
+function obterDadosFormularioComoJSON(formId) {
+    const formData = $(formId).serializeArray();
+    const jsonData = {};
+
+    $(formData).each(function(index, field) {
+        jsonData[field.name] = field.value;
+    });
+
+    return JSON.stringify(jsonData);
 }

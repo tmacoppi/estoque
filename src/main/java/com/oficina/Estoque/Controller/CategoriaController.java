@@ -16,7 +16,7 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
-    @GetMapping("/")
+    @GetMapping("/listar")
     public ResponseEntity<List<Categoria>> listCategoria() {
         return new ResponseEntity<>(categoriaService.listarCategoria(), HttpStatus.OK);
     }
@@ -25,6 +25,11 @@ public class CategoriaController {
     public ResponseEntity<Categoria> gravar(@RequestBody Categoria categoria) {
         categoriaService.gravar(categoria);
         return new ResponseEntity<>(categoria, HttpStatus.OK);
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<Categoria> buscar(@RequestParam(value="idCategoria") Long idCategoria) {
+        return new ResponseEntity<>(categoriaService.buscarCategoriaPorId(idCategoria), HttpStatus.OK);
     }
 
     @DeleteMapping("/apagar")
