@@ -5,6 +5,13 @@ $(document).ready(
             event.preventDefault();
             ajaxListarCategoria();
         });
+
+        $("#categoriaForm").submit(function(event) {
+
+            event.preventDefault();
+            ajaxPostCategoria();
+        });
+
     });
 
 function ajaxListarCategoria() {
@@ -52,13 +59,6 @@ function montarTabelaResultado(result) {
     $('#getResultDiv').html(table);
 
 }
-
-// SUBMIT FORM
-$("#categoriaForm").submit(function(event) {
-
-    event.preventDefault();
-    ajaxPostCategoria();
-});
 
 function ajaxPostCategoria() {
     console.log("ajaxPostCategoria");
@@ -128,29 +128,4 @@ function editarCategoria(idCategotia) {
 
 function apagarCategoria(idCategoria) {
     ajaxDelCategoria(idCategoria);
-}
-
-function preencherFormulario(objeto) {
-    // Percorre as propriedades do objeto
-    for (const propriedade in objeto) {
-        // Verifica se a propriedade é do próprio objeto (não herdada)
-        if (objeto.hasOwnProperty(propriedade)) {
-            // Seleciona o campo do formulário com o mesmo nome da propriedade
-            const campo = $("#" + propriedade);
-
-            // Define o valor do campo com o valor da propriedade
-            campo.val(objeto[propriedade]);
-        }
-    }
-}
-
-function obterDadosFormularioComoJSON(formId) {
-    const formData = $(formId).serializeArray();
-    const jsonData = {};
-
-    $(formData).each(function(index, field) {
-        jsonData[field.name] = field.value;
-    });
-
-    return JSON.stringify(jsonData);
 }
