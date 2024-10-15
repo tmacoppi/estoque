@@ -11,6 +11,34 @@ $(document).ready(
             event.preventDefault();
             ajaxPostFornecedor();
         });
+/*
+        $("#cnpjCpf").keydown(function(){
+            try {
+                $("#cnpjCpf").unmask();
+            } catch (e) {}
+
+            var tamanho = $("#cnpjCpf").val().length;
+
+            if(tamanho < 11){
+                $("#cnpjCpf").mask("999.999.999-99");
+            } else {
+                $("#cnpjCpf").mask("99.999.999/9999-99");
+            }
+
+            // ajustando foco
+            var elem = this;
+            setTimeout(function(){
+                // mudo a posição do seletor
+                elem.selectionStart = elem.selectionEnd = 10000;
+            }, 0);
+            // reaplico o valor para mudar o foco
+            var currentValue = $(this).val();
+            $(this).val('');
+            $(this).val(currentValue);
+        });
+*/
+        //$("#cnpjCpf").mask("999.999.999-99", {placeholder: "___.___.___-__"}); // Máscara para CPF
+        //$("#cnpjCpf").mask("99.999.999/9999-99", {placeholder: "__.___.___/____-__"}); // Máscara para CNPJ
 
     });
 
@@ -36,7 +64,9 @@ function montarTabelaResultado(result) {
     const tbody = $('<tbody></tbody>');
 
     // Create table header
-    thead.append('<tr><th>Ações</th><th>Nome</th></tr>');
+    thead.append('<tr><th>Ações</th>');
+    thead.append('<th>Nome</th></tr>');
+    thead.append('<th>Nome</th></tr>');
 
     // Create table rows from data
     $.each(result, function(index, item) {
@@ -62,6 +92,18 @@ function montarTabelaResultado(result) {
 function ajaxPostFornecedor() {
     console.log("ajaxPostFornecedor");
     const formData = obterDadosFormularioComoJSON("#fornecedorForm");
+
+    if (validarCPF($("#cnpjCpf").val()) || validarCNPJ($("#cnpjCpf").val())) {
+        // CPF ou CNPJ válido
+        $("#feedback").removeClass("invalid-feedback").addClass("valid-feedback").text("CPF ou CNPJ válido!");
+        $("#cnpjCpf").removeClass("is-invalid").addClass("is-valid");
+    } else {
+        // CPF ou CNPJ inválido
+        $("#feedback").removeClass("valid-feedback").addClass("invalid-feedback").text("CPF ou CNPJ inválido.");
+        $("#cnpjCpf").removeClass("is-valid").addClass("is-invalid");
+        toast("Fornecedor", "CNPJ/CPF inválido!", "error");
+        return;
+    }
 
     // DO POST
     $.ajax({
