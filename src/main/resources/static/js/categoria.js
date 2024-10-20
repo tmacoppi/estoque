@@ -7,9 +7,11 @@ function ajaxListarCategoria() {
             console.log(result);
             montarTabelaResultado(result);
         },
-        error : function(e) {
-            toast("Categoria", e.responseText, "error");
-            console.log("ERROR: ", e);
+        error: function(jqXHR, textStatus, errorThrown) {
+            // código a ser executado em caso de erro
+            toast("Categoria", textStatus, "error");
+            console.error('Erro:', textStatus, errorThrown);
+            console.error('Detalhes do erro:', jqXHR.responseText);
         }
     });
 }
@@ -55,14 +57,16 @@ function ajaxPostCategoria() {
         data : formData,
         dataType : 'json',
         success : function(result) {
-            toast("Categoria", "Gravada com sucesso!", "success");
+            toast("Categoria", "'" + result.nome + "' gravada com sucesso!", "success");
             $('#categoriaForm').trigger("reset");
             ajaxListarCategoria();
             console.log(result);
         },
-        error : function(e) {
-            toast("Categoria", e, "error");
-            console.log("ERROR: ", e);
+        error: function(jqXHR, textStatus, errorThrown) {
+            // código a ser executado em caso de erro
+            toast("Categoria", textStatus, "error");
+            console.error('Erro:', textStatus, errorThrown);
+            console.error('Detalhes do erro:', jqXHR.responseText);
         }
     });
 
@@ -82,9 +86,11 @@ function ajaxDelCategoria(idCategoria) {
             toast("Categoria", "[" + result.nome + "] apagada com sucesso!", "error");
             ajaxListarCategoria();
         },
-        error : function(e) {
-            toast("Categoria", e, "error");
-            console.log("ERROR: ", e);
+        error: function(jqXHR, textStatus, errorThrown) {
+            // código a ser executado em caso de erro
+            toast("Categoria", textStatus, "error");
+            console.error('Erro:', textStatus, errorThrown);
+            console.error('Detalhes do erro:', jqXHR.responseText);
         }
     });
 
@@ -99,9 +105,11 @@ function editarCategoria(idCategotia) {
             console.log(result);
             preencherFormulario(result);
         },
-        error : function(e) {
-            toast("Categoria", e.responseText, "error");
-            console.log("ERROR: ", e);
+        error: function(jqXHR, textStatus, errorThrown) {
+            // código a ser executado em caso de erro
+            toast("Categoria", textStatus, "error");
+            console.error('Erro:', textStatus, errorThrown);
+            console.error('Detalhes do erro:', jqXHR.responseText);
         }
     });
 }

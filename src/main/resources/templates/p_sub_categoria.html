@@ -2,34 +2,50 @@
 <html th:replace="~{base :: layout (~{:: main})}"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
 <body>
 <main>
     <div class="row">
         <div class="col-12">
             <div class="bg-secondary text-lg-center p-3">
-                <h3>Cadastro - Categoria</h3>
+                <h3>Cadastro - Sub-Categoria</h3>
             </div>
         </div>
         <div class="col-12 bg-light p-3">
-            <form id="categoriaForm">
+            <form id="subCategoriaForm">
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="id" name="id" />
                     <label for="nome">Nome:</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Nome da Categoria" name="nome" required>
-                    <label for="categoria">Categoria:</label>
-                    <select class="form-control" id="categoria" name="categoria" required>
-                        <option value="">Carregando...</option>
-                    </select>
+                    <input type="text" class="form-control" id="nome" placeholder="Nome da Sub-Categoria" name="nome" required>
                 </div>
                 <div style="padding: 20px 10px 20px 50px"><button type="submit" class="btn btn-primary">Gravar</button></div>
             </form>
         </div>
         <div class="col-12">
-            <div style="padding: 20px 10px 20px 50px"><button id="listarCategoria" type="button" class="btn btn-primary">Listar Categoria</button></div>
+            <div style="padding: 20px 10px 20px 50px"><button id="listarSubCategoria" type="button" class="btn btn-primary">Listar Sub-Categoria</button></div>
             <div id="getResultDiv">
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(
+            function() {
+                // GET REQUEST
+                $("#listarSubCategoria").click(function(event) {
+                    event.preventDefault();
+                    ajaxListarSubCategoria();
+                });
+
+                $("#subCategoriaForm").submit(function(event) {
+                    event.preventDefault();
+                    ajaxPostSubCategoria();
+                });
+
+                ajaxListarSubCategoria();
+
+            });
+    </script>
 </main>
 
 </body>

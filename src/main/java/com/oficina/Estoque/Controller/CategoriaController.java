@@ -2,6 +2,7 @@ package com.oficina.Estoque.Controller;
 
 import com.oficina.Estoque.Entity.Categoria;
 import com.oficina.Estoque.Service.CategoriaService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/categoria")
 public class CategoriaController {
@@ -22,13 +24,9 @@ public class CategoriaController {
     }
 
     @PostMapping("/gravar")
-    public ResponseEntity<String> gravar(@RequestBody Categoria categoria) {
-        try {
-            categoriaService.gravar(categoria);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+    public ResponseEntity<Categoria> gravar(@RequestBody Categoria categoria) {
+        categoriaService.gravar(categoria);
+        return new ResponseEntity<>(categoria, HttpStatus.OK);
     }
 
     @GetMapping("/buscar")
