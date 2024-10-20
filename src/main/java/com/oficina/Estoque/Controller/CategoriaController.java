@@ -22,9 +22,13 @@ public class CategoriaController {
     }
 
     @PostMapping("/gravar")
-    public ResponseEntity<Categoria> gravar(@RequestBody Categoria categoria) {
-        categoriaService.gravar(categoria);
-        return new ResponseEntity<>(categoria, HttpStatus.OK);
+    public ResponseEntity<String> gravar(@RequestBody Categoria categoria) {
+        try {
+            categoriaService.gravar(categoria);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
     @GetMapping("/buscar")

@@ -13,7 +13,7 @@ import java.util.Objects;
 @Setter
 @Embeddable
 public class SaidaPedidoId implements Serializable {
-    private static final long serialVersionUID = -2599704052466481798L;
+    private static final long serialVersionUID = 9163792709159367899L;
     @Column(name = "idSaida", nullable = false)
     private Long idSaida;
 

@@ -2,7 +2,6 @@
 <html th:replace="~{base :: layout (~{:: main})}"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-
 <body>
 <main>
     <div class="row">
@@ -17,6 +16,10 @@
                     <input type="hidden" class="form-control" id="id" name="id" />
                     <label for="nome">Nome:</label>
                     <input type="text" class="form-control" id="nome" placeholder="Nome da Categoria" name="nome" required>
+                    <label for="categoria">Categoria:</label>
+                    <select class="form-control" id="categoria" name="categoria" required>
+                        <option value="">Carregando...</option>
+                    </select>
                 </div>
                 <div style="padding: 20px 10px 20px 50px"><button type="submit" class="btn btn-primary">Gravar</button></div>
             </form>
@@ -27,25 +30,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(
-            function() {
-                // GET REQUEST
-                $("#listarCategoria").click(function(event) {
-                    event.preventDefault();
-                    ajaxListarCategoria();
-                });
-
-                $("#categoriaForm").submit(function(event) {
-                    event.preventDefault();
-                    ajaxPostCategoria();
-                });
-
-                ajaxListarCategoria();
-
-            });
-    </script>
 </main>
 
 </body>

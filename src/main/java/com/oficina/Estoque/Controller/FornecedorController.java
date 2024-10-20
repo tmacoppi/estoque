@@ -23,7 +23,11 @@ public class FornecedorController {
 
     @PostMapping("/gravar")
     public ResponseEntity<Fornecedor> gravar(@RequestBody Fornecedor fornecedor) {
-        fornecedorService.gravar(fornecedor);
+        try {
+            fornecedorService.gravar(fornecedor);
+        } catch (Exception e) {
+            return new ResponseEntity<>(fornecedor, HttpStatus.OK);
+        }
         return new ResponseEntity<>(fornecedor, HttpStatus.OK);
     }
 

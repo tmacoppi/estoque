@@ -36,11 +36,18 @@ public class Produto {
     @Column(name = "DataCadastro")
     private LocalDateTime dataCadastro;
 
+    @Column(name = "DataValidade")
+    private LocalDateTime dataValidade;
+
     @Column(name = "Status")
     private Long status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idCategoria", nullable = false)
     private Categoria idCategoria;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idSub_Categoria", nullable = false)
+    private SubCategoria idsubCategoria;
 
 }

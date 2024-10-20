@@ -1,19 +1,3 @@
-$(document).ready(
-    function() {
-        // GET REQUEST
-        $("#listarCategoria").click(function(event) {
-            event.preventDefault();
-            ajaxListarCategoria();
-        });
-
-        $("#categoriaForm").submit(function(event) {
-
-            event.preventDefault();
-            ajaxPostCategoria();
-        });
-
-    });
-
 function ajaxListarCategoria() {
     $('#getResultDiv').empty();
     $.ajax({
@@ -71,7 +55,7 @@ function ajaxPostCategoria() {
         data : formData,
         dataType : 'json',
         success : function(result) {
-            toast("Categoria", result.nome + " gravada com sucesso!", "success");
+            toast("Categoria", "Gravada com sucesso!", "success");
             $('#categoriaForm').trigger("reset");
             ajaxListarCategoria();
             console.log(result);
