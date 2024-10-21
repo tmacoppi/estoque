@@ -5,7 +5,7 @@ function ajaxListarCategoria() {
         url : "/categoria/listar",
         success : function(result) {
             console.log(result);
-            montarTabelaResultado(result);
+            montarTabelaResultadoCategoria(result);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             // código a ser executado em caso de erro
@@ -16,7 +16,36 @@ function ajaxListarCategoria() {
     });
 }
 
-function montarTabelaResultado(result) {
+function ajaxCarregarComboCategoria() {
+    $('#getResultDiv').empty();
+    $.ajax({
+        type : "GET",
+        url : "/categoria/listar",
+        success : function(result) {
+            console.log(result);
+            montarComboCategoria(result);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            // código a ser executado em caso de erro
+            toast("Categoria", textStatus, "error");
+            console.error('Erro:', textStatus, errorThrown);
+            console.error('Detalhes do erro:', jqXHR.responseText);
+        }
+    });
+
+}
+
+function montarComboCategoria(result) {
+    var selectBox = $('#selectCategoria');
+    selectBox.empty(); // Limpa o conteúdo atual da select box
+    selectBox.append('<option value="">Selecione uma Categoria</option>'); // Adiciona uma opção padrão
+
+    $.each(result, function(index, item) {
+        selectBox.append('<option value="' + item.id + '">' + item.nome + '</option>');
+    });
+}
+
+function montarTabelaResultadoCategoria(result) {
     const table = $('<table></table>').addClass('table'); // Create a table element
     const thead = $('<thead></thead>');
     const tbody = $('<tbody></tbody>');

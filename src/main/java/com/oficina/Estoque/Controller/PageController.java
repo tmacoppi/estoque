@@ -16,6 +16,13 @@ public class PageController {
         return "p_categoria";
     }
 
+    @RequestMapping("/p_sub_categoria")
+    public String subCategoria(Model model, final HttpSession session) {
+
+        //getModel(model, 0);
+        return "p_sub_categoria";
+    }
+
     @RequestMapping("/p_fornecedor")
     public String fornecedor(Model model, final HttpSession session) {
 

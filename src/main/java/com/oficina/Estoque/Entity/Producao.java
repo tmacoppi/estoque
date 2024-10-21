@@ -23,7 +23,7 @@ public class Producao {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idProduto", nullable = false)
-    private Produto idProduto;
+    private Produto produto;
 
     @Column(name = "Medidas", length = 45)
     private String medidas;

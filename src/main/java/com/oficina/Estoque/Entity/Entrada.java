@@ -33,10 +33,10 @@ public class Entrada {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idProduto", nullable = false)
-    private Produto idProduto;
+    private Produto produto;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idFornecedor", nullable = false)
-    private Fornecedor idFornecedor;
+    private Fornecedor fornecedor;
 
 }

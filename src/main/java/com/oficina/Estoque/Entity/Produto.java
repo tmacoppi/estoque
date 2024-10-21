@@ -44,10 +44,10 @@ public class Produto {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idCategoria", nullable = false)
-    private Categoria idCategoria;
+    private Categoria categoria;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idSub_Categoria", nullable = false)
-    private SubCategoria idsubCategoria;
+    private SubCategoria subCategoria;
 
 }

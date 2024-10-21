@@ -16,11 +16,11 @@ public class SaidaProducao {
     @MapsId("idSaida")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idSaida", nullable = false)
-    private Saida idSaida;
+    private Saida saida;
 
     @MapsId("idProducao")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idProducao", nullable = false)
-    private Producao idProducao;
+    private Producao producao;
 
 }

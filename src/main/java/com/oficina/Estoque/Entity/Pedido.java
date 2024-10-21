@@ -26,6 +26,6 @@ public class Pedido {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idCliente", nullable = false)
-    private Cliente idCliente;
+    private Cliente cliente;
 
 }

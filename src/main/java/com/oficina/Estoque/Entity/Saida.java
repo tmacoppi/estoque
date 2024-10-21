@@ -30,6 +30,6 @@ public class Saida {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idProduto", nullable = false)
-    private Produto idProduto;
+    private Produto produto;
 
 }

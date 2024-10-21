@@ -18,8 +18,8 @@ public class SubCategoria {
     @Column(name = "Nome", length = 45)
     private String nome;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "idCategoria", nullable = false)
-    private Categoria idCategoria;
+    private Categoria categoria;
 
 }

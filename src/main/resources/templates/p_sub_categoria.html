@@ -15,8 +15,13 @@
             <form id="subCategoriaForm">
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="id" name="id" />
+                    <input type="hidden" class="form-control" id="categoria" name="categoria" />
                     <label for="nome">Nome:</label>
                     <input type="text" class="form-control" id="nome" placeholder="Nome da Sub-Categoria" name="nome" required>
+                    <label for="selectCategoria">Categoria:</label>
+                    <select class="form-control" id="selectCategoria">
+                        <option value="">Carregando...</option>
+                    </select>
                 </div>
                 <div style="padding: 20px 10px 20px 50px"><button type="submit" class="btn btn-primary">Gravar</button></div>
             </form>
@@ -42,7 +47,14 @@
                     ajaxPostSubCategoria();
                 });
 
+                ajaxCarregarComboCategoria();
                 ajaxListarSubCategoria();
+
+                $("#selectCategoria").change(function() {
+                    var selectedValue = $(this).val();
+                    console.log(selectedValue);
+                    $("#categoria").val(selectedValue);
+                });
 
             });
     </script>
