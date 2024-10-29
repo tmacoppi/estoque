@@ -49,7 +49,7 @@ function ajaxListarFornecedor() {
         url : "/fornecedor/listar",
         success : function(result) {
             console.log(result);
-            montarTabelaResultado(result);
+            montarTabelaResultadoFornecedor(result);
         },
         error : function(e) {
             toast("Fornecedor", e.responseText, "error");
@@ -58,15 +58,13 @@ function ajaxListarFornecedor() {
     });
 }
 
-function montarTabelaResultado(result) {
+function montarTabelaResultadoFornecedor(result) {
     const table = $('<table></table>').addClass('table'); // Create a table element
     const thead = $('<thead></thead>');
     const tbody = $('<tbody></tbody>');
 
     // Create table header
-    thead.append('<tr><th>Ações</th>');
-    thead.append('<th>Nome</th></tr>');
-    thead.append('<th>Nome</th></tr>');
+    thead.append('<tr><th>Ações</th><th>Nome</th><th>E-mail</th></tr>');
 
     // Create table rows from data
     $.each(result, function(index, item) {
@@ -79,6 +77,7 @@ function montarTabelaResultado(result) {
         row.append(actionsCell);
 
         row.append('<td>' + item.nome + '</td>');
+        row.append('<td>' + item.email + '</td>');
         tbody.append(row);
     });
 
