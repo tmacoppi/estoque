@@ -29,4 +29,12 @@ public class PageController {
         //getModel(model, 0);
         return "p_fornecedor";
     }
+
+    @RequestMapping("/p_cliente")
+    public String cliente(Model model, final HttpSession session) {
+
+        //getModel(model, 0);
+        return "p_cliente";
+    }
+
 }
